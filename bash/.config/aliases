@@ -16,8 +16,8 @@ function nvims() {
 }
 
 
-alias ls='lsd -lA --group-directories-first'
-
+#alias ls='lsd -lA --group-directories-first'
+alias ls='lsd'
 alias sb="cd ~/Nextcloud/Obsidian/ && ls -a"
 
 # set variable and alias for calcurse pass usage
