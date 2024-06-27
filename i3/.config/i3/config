@@ -36,16 +36,8 @@ exec --no-startup-id davmail
 # nextcloud sync daemon
 exec --no-startup-id nextcloud
 
-## Start sound server and socat listener to make sound visualizer work ###
-
 ## ACME for connections
-#exec --no-startup-id mopidy
-#exec --no-startup-id $term -e "mkfifo /tmp/mpd.fifo;while :; do socat -d -d -T 1 -u UDP4-LISTEN:5555 OPEN:/tmp/mpd.fifo; done &"
-
 exec --no-startup-id /usr/local/amazon/sbin/acmed --session -vvv -f ~/.acme/logs/acmed_session.log & 
-
-### visualizer replace socat with netcat
-#while :; do yes $'\n' | nc -lu 127.0.0.1 5555 > /tmp/mpd.fifo; done
 
 #Try to load VGA screen if available:
 #exec --no-startup-id ~/.config/Scripts/screen.sh v

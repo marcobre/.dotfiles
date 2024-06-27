@@ -24,8 +24,8 @@ return {
 
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-			})
+        capabilities = capabilities,
+      })
 			lspconfig.tsserver.setup({
 				capabilities = capabilities,
 			})
