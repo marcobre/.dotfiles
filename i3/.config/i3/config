@@ -167,7 +167,7 @@ bindsym $mod+Shift+Delete	exec $truemute ; exec $truepause ; workspace lmao ; ex
 bindsym $mod+q			kill
 bindsym $mod+Shift+q		kill
 
-bindsym $mod+w			exec --no-startup-id $term -e wal -i ~/Nextcloud/Wallpaper ; restart
+bindsym $mod+w			exec --no-startup-id $term -e wal -i ~/Nextcloud/Wallpaper ; exec $term -e pkill dunst ; exec $term -e dunst ; restart 
 #bindsym $mod+w			exec --no-startup-id $term -e w3m http://lukesmith.xyz
 bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
 
