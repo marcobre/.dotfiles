@@ -12,8 +12,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=5000
+HISTFILESIZE=8000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -106,10 +106,6 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-if [ -e /usr/bin/aws_completer ]; then
-	complete -C '/usr/bin/aws_completer' aws
-fi
-
 # if the command-not-found package is installed, use it
 if [ -x /usr/lib/command-not-found -o -x /usr/share/command-not-found/command-not-found ]; then
 	function command_not_found_handle {
@@ -125,10 +121,6 @@ if [ -x /usr/lib/command-not-found -o -x /usr/share/command-not-found/command-no
 			return 127
 		fi
 	}
-fi
-
-if [ -e "/apollo/env/SDETools/bin" ]; then
-	export PATH="/apollo/env/SDETools/bin:$PATH"
 fi
 
 alias ..="cd .."
@@ -150,7 +142,7 @@ alias audio="alsamixer"
 alias calender="calcurse"
 
 #Some aliases
-alias v="nvims"
+alias v="nvim-marcom"
 alias ka="killall"
 alias sv="sudo nvim"
 alias r="ranger"
@@ -165,22 +157,15 @@ alias sdn="sudo shutdown now"
 alias yt="youtube-dl -ic"
 alias yta="youtube-dl -xic"
 alias starwars="telnet towel.blinkenlights.nl"
-alias nf="clear && neofetch"
+alias ff="clear && fastfetch"
 alias newnet="sudo systemctl restart NetworkManager"
 
 #mountpoints
-alias drive="sudo mount -t davfs -o users,uid=${USER},gid=domain^users https://drive-webdav.corp.amazon.com/mnt/${USER}@  ~/mount/drive-corp/"
-alias ber12="sudo mount -t cifs -o username=$USER,rw,uid=$USER,gid=domain^users,port=445,vers=1.0 //file-ber12-01/BER12_IT-Support ~/mount/ber12"
 alias nas="sudo mount -t cifs //192.168.2.10/home ~/mount/ --verbose -o vers=1.0,rw,user=marcom"
 ##VPN
-alias vpn="sudo openconnect --authgroup orca-Ubuntu --csd-wrapper ~/bin/csd_wrapper orca.amazon.com --user bretzke
-"
 
 #remote connections
 alias area030="ssh marcom@62.75.141.54"
-alias consoleaccess="ssh neteng-bastion-corp-dub-dub2-12001.dub2.corp.amazon.com"
-#remote connection via bomgar
-alias bomgar="sh ~/.local/bin/bomgar-rep-installer.desktop"
 #Directory Shortcuts:
 
 alias h="cd ~ && ls -a"
@@ -198,31 +183,14 @@ if [ -f ~/.config/aliases ]; then
 	. ~/.config/aliases
 fi
 
-# function to select neovim config
-#function nvims() {
-#	items=("default" "nvim" "nvim-kickstart" "nvim-lazyvim" "nvim-fisavim")
-#	config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-#	if [[ -z $config ]]; then
-#		echo "Nothing selected"
-#		return 0
-#	elif [[ $config == "default" ]]; then
-#		config=""
-#	fi
-#	NVIM_APPNAME=$config nvim $@
-#}
-
-# load the virtualenvwrapper config to make 'workon' virtualenv switch work
-#export WORKON_HOME=$HOME/virenvs
-#export PROJECT_HOME=$HOME/dev/projects
-#source ~/.local/bin/virtualenvwrapper.sh
 
 # Import colorscheme from 'wal'
 #(wal -r &)
-(cat ~/.cache/wal/sequences &)
-source ~/.cache/wal/colors-tty.sh
-PYTHONPATH="${PYTHONPATH}:/home/ANT.AMAZON.COM/bretzke/virenvs/memacs"
-export PYTHONPATH
+#(cat ~/.cache/wal/sequences &)
+#source ~/.cache/wal/colors-tty.sh
 
+eval "$(fzf --bash)"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_COMMAND="fd --type f --hidden"
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow"
 export FZF_DEFAULT_OPTS="--preview 'bat --color=always {}'"
+eval "$(starship init bash)"
