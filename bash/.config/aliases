@@ -10,16 +10,18 @@ function nvims() {
     echo "Nothing selected"
     return 0
   elif [[ $config == "default" ]]; then
-    config=""
+    config="nvim-lazyvim"
   fi
   NVIM_APPNAME=$config nvim $@
 }
 
+# the following line applies the last created wallust colors from its cache
+cat ~/.cache/wallust/sequences
 
-#alias ls='lsd -lA --group-directories-first'
-alias ls='lsd'
-alias sb="cd ~/Nextcloud/Obsidian/ && ls -a"
-
+alias ls='lsd -lA --group-directories-first'
+#alias ls='lsd'
+#alias sb="cd ~/Nextcloud/Obsidian/ && ls -a"
+alias sb="cd ~/Syncthing/ && ls -a"
 # set variable and alias for calcurse pass usage
 CALCURSE_CALDAV_PASSWORD=$(pass show area030.org)
 alias calsync="CALCURSE_CALDAV_PASSWORD=$(pass show area030.org) calcurse-caldav"

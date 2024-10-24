@@ -15,11 +15,13 @@ gaps outer 15
 smart_gaps on
 #smart_borders on
 set $mod Mod4
-set $term urxvt
+#set $term urxvt
+set $term kitty
 set $BROWSER brave-browser
 # Standard Font
 #font pango:System San Francisco Display 16
-font pango:FiraCode Nerd Font Mono 14
+#font pango:FiraCode Nerd Font Mono 14
+font pango:Fira Code Medium 14
 #font pango:DejaVu Sans Mono for Powerline 16
 #set $video --no-startup-id bash ~/.config/Scripts/video.sh
 #set $stoprec --no-startup-id killall ffmpeg & killall screenkey
@@ -204,8 +206,8 @@ bindsym $mod+s			gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
 
 #bindsym $mod+d			exec rofi -show run
-bindsym $mod+d exec "rofi -font \\"System San Francisco Display 18\\" -combi-modi window,drun,run,ssh,find:~/.local/share/rofi/finder.sh -show combi -lines 5 -opacity \\"80\\"" 
-
+#bindsym $mod+d exec "rofi -font \\"System San Francisco Display 18\\" -combi-modi window,drun,run,ssh,find:~/.local/share/rofi/finder.sh -show combi -lines 5 -opacity \\"80\\"" 
+bindsym $mod+d exec "pkill rofi || rofi -font \\"System San Francisco Display 14\\" -show drun -modi drun,filebrowser,run,window"
 
 #bindsym $mod+d exec "rofi -font \\"Systen San Francisco Display 18\\" -combi-modi window,drun,run,ssh -modi combi -show combi -color-window \\"#000000, #000000, #000000\\" -color-normal \\"#000000, #b3e774, #000000, #b3e774, #000000\\" -color-active \\"#000000, #b3e774, #000000, #b3e774, #000000\\" -color-urgent \\"#000000, #b3e774, #000000, #b3e774, #000000\\""
 

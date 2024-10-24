@@ -159,6 +159,7 @@ alias yta="youtube-dl -xic"
 alias starwars="telnet towel.blinkenlights.nl"
 alias ff="clear && fastfetch"
 alias newnet="sudo systemctl restart NetworkManager"
+alias fd="fdfind"
 
 #mountpoints
 alias nas="sudo mount -t cifs //192.168.2.10/home ~/mount/ --verbose -o vers=1.0,rw,user=marcom"
@@ -189,8 +190,9 @@ fi
 #source ~/.cache/wal/colors-tty.sh
 
 #eval "$(fzf --bash)"
-export FZF_DEFAULT_COMMAND="fdfind --type f --hidden --follow"
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow"
 export FZF_DEFAULT_OPTS="--preview 'bat --color=always {}'"
 eval "$(starship init bash)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+. "$HOME/.cargo/env"

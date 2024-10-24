@@ -1,0 +1,112 @@
+#General newsboat options
+#show-read-feeds no
+
+#browser "notify-send -t 2000 'playing newsboat link' && mpv --profile=podcast %u >/dev/null 2>&1 || notify-send -u 'critical' -t 5000 'something went wrong' &"
+#browser "mpc clear && mpc add %u && mpc play" 
+browser "xdg-open %u"
+#run-on-startup set browser 'mpv' #Working
+
+auto-reload no
+#external-url-viewer "scan -dc -r 'linkhandler {}'"
+external-url-viewer "mpv %u"
+goto-next-feed no
+datetime-format "%d-%b-%Y"
+articlelist-format "%4i %f %D %?T?|%-17T| ?%t"
+
+# Load Feeds in parallel to speed up
+reload-threads 100
+
+#bind the makro prefix 
+bind-key m macro-prefix
+
+# add seperators for youtube, blogs aso
+feedlist-format "%?T?║%4i %n %8u %8T %t &╠═══════════════════════════════════════════════════════════════%t?"
+highlight feedlist "[║│]" color3 color0
+highlight feedlist "╠═.*" color3 color0 
+
+
+#Podboat options
+player "mpv"
+download-path "~/Downloads/%N"
+podlist-format "%4i [%6dMB/%6tMB] [%5p %%] [%12K] %-20S %b"
+
+
+#Arrow keys for navigation
+bind-key DOWN down
+bind-key UP up
+bind-key RIGHT open
+bind-key LEFT quit
+
+#More vim-like keys
+bind-key j down
+bind-key k up
+bind-key j next articlelist
+bind-key k prev articlelist
+#bind-key J next-feed articlelist
+#bind-key K prev-feed articlelist
+bind-key J pagedown
+bind-key K pageup
+bind-key L next-feed articlelist
+bind-key H prev-feed articlelist
+bind-key n next-unread
+bind-key N prev-unread
+bind-key G end
+bind-key g home
+bind-key d pagedown
+bind-key ^F pagedown
+bind-key ^B pageup
+bind-key u pageup
+bind-key l open
+bind-key h quit
+bind-key a toggle-article-read
+bind-key D pb-download
+bind-key U show-urls
+bind-key x pb-delete
+bind-key p pb-play
+bind-key a pb-toggle-download-all
+bind-key SPACE toggle-article-read
+
+color listnormal cyan default
+color listfocus black yellow standout bold
+color listnormal_unread blue default
+color listfocus_unread yellow default bold
+color info red black bold
+color article white default bold
+
+
+macro , open-in-browser
+macro o set browser "notify-send -t 2000 'playing newsboat link' && mpv --profile=podcast %u >/dev/null 2>&1 || notify-send -u 'critical' -t 5000 'something went wrong' &"; open-in-browser; set browser "mpc clear && mpc add %u && mpc play" 
+macro t set browser "qndl" ; open-in-browser ; set browser linkhandler
+macro a set browser "tsp youtube-dl --add-metadata -xic -f bestaudio/best" ; open-in-browser ; set browser linkhandler
+macro v set browser "dunstify 'Playing newsboat link' && i3 exec 'mpv --profile=podcast --fullscreen=no'" ; open-in-browser ; set browser linkhandler
+#macro v set browser "setsid -f mpv" ; open-in-browser ; set browser linkhandler
+#macro y set browser "mpv %u" ; open-in-browser ; set browser "elinks %u"
+macro w set browser "lynx" ; open-in-browser ; set browser linkhandler
+#macro d set browser "dmenuhandler" ; open-in-browser ; set browser linkhandler
+macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler
+#macro C set browser "youtube-viewer --comments=%u" ; open-in-browser ; set browser linkhandler
+#macro p set browser "peertubetorrent %u 480" ; open-in-browser ; set browser linkhandler
+#macro P set browser "peertubetorrent %u 1080" ; open-in-browser ; set browser linkhandler
+#macro p set browser "notify-send 'Playing newsboat link' && mpv --no-fullscreen %u >/dev/null 2>&1 &"; one; set browser firefox
+macro p set browser "mpv --no-fullscreen %u >/dev/null 2>&1 &"; one; set browser firefox
+macro d set browser "echo 'Downloading %u' &&  curl --progress-bar -C - --output-dir ~/Downloads -LO %u"; one; set browser firefox
+macro b set browser "notify-send -t 2000 'opening link with xdg-open' && xdg-open %u >/dev/null 2>&1 || notify-send -u 'critical' -t 5000 'something went wrong' &"
+macro v set browser "notify-send -t 2000 'playing newsboat link' && mpv --profile=podcast %u >/dev/null 2>&1 || notify-send -u 'critical' -t 5000 'something went wrong' &"
+
+macro 3 set browser "setsid --fork mpv --profile=360p %u > /dev/null 2>&1"; open-in-browser; set browser "xdg-open %u";
+macro 7 set browser "setsid --fork mpv --profile=720p %u > /dev/null 2>&1"; open-in-browser; set browser "xdg-open %u";
+
+
+
+highlight all "---.*---" yellow
+highlight feedlist ".*(0/0))" black
+highlight article "(^Feed:.*|^Title:.*|^Author:.*)" cyan default bold
+highlight article "(^Link:.*|^Date:.*)" default default
+highlight article "https?://[^ ]+" green default
+highlight article "^(Title):.*$" blue default
+highlight article "\\[[0-9][0-9]*\\]" magenta default bold
+highlight article "\\[image\\ [0-9]+\\]" green default bold
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" green default bold
+highlight article ":.*\\(link\\)$" cyan default
+highlight article ":.*\\(image\\)$" blue default
+highlight article ":.*\\(embedded flash\\)$" magenta default
