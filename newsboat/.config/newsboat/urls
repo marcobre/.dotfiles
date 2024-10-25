@@ -1,5 +1,7 @@
 "query:YouTube:tags # \"YouTube\""
 https://www.youtube.com/feeds/videos.xml?channel_id=UCkf4VIqu3Acnfzuk3kRIFwA "Linux" "Youtube"                              #gobletu
+https://www.youtube.com/feeds/videos.xml?channel_id=UCYeiozh-4QwuC1sjgCmB92w "Dev" "Youtube"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCbftBe1WNc1MBP_bWPDUHXg "Hardware" "Youtube"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg "Linux" "YouTube"                              #distrotube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCZiL6BoryLWxyapUuVYW27g "Linux" "YouTube"                              #avg linux user
 https://www.youtube.com/feeds/videos.xml?channel_id=UCg6gPGh8HU2U01vaFCAsvmQ "Linux" "YouTube"                              #chris titus
@@ -62,7 +64,12 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCxO_ya-RmAXCXJCU54AxYFw "Yo
 
 "query:Reddit:tags # \"Reddit\""
 https://www.reddit.com/r/bash.rss "Reddit" "linux bash"
-https://www.reddit.com/r/vim.rss "Reddit" "linux"
+https://www.reddit.com/r/neovim.rss "Reddit" "neovim"
+https://www.reddit.com/r/usefulscripts.rss "Reddit" "Scripts"
+https://www.reddit.com/r/hyprland/.rss "Reddit" "hyprland"
+https://www.reddit.com/r/opensource/.rss "Reddit" "OpenSource"
+https://www.reddit.com/r/commandline/.rss "Reddit" "commandline"
+https://www.reddit.com/r/archlinux/.rss "Reddit" "Arch Reddit"
 https://www.reddit.com/user/C4rnAg3.rss "Reddit" "~Bangladeshi Bash"
 
 "query:Blogs:tags # \"Blog\""
@@ -105,12 +112,14 @@ http://matt.might.net/articles/feed.rss "Coding" "~Matt Might's blog"
 
 "query:Linux:tags # \"Linux\""
 http://feeds.feedburner.com/Phoronix "Linux" "~Phoronix"
+https://www.archlinux.org/feeds/news/ "Linux" "Arch Linux"
 http://lwn.net/headlines/newrss "Linux" "~LWN"
 http://www.linuxjournal.com/node/feed "Linux" "~Linux Journal"
 http://www.linuxinsider.com/perl/syndication/rssfull.pl "Linux" "~LinuxInsider"
 #https://stackoverflow.com/jobs/feed?r=true&tl=c+c%2b%2b+perl+python+ "~StackOverflow Jobs"
 #https://stackoverflow.com/jobs/feed?r=true&tl=c+kernel+ "~StackOverflow C Jobs"
 https://www.ghacks.net/category/operating-systems/linux/feed/ "Linux"
+https://www.omgubuntu.co.uk/feed "Linux" "omgubuntu"
 
 "query:Politik:tags # \"Politik\""
 https://schwarzerpfeil.de/feed/ "Politik"
