@@ -27,15 +27,15 @@ http://example.org/feed6.xml "Peter Peterson"
 
 https://www.archlinux.org/feeds/news/ "Archlinux"
 https://opensource.com/taxonomy/term/6803/feed "open source linux"
-https://www.howtogeek.com/feed/ howtogeek"
-https://www.topbug.net/blog/category/unix-variants/gnu-linux/feed/ linux"
-http://lukesmith.xyz/rss.xml "Blog"
-https://blog.fefe.de/rss.xml?html Fefe"
+https://www.howtogeek.com/feed/ "howtogeek"
+https://www.topbug.net/blog/category/unix-variants/gnu-linux/feed/ "Topbug linux"
+http://lukesmith.xyz/rss.xml "Luke Smith Blog"
+https://blog.fefe.de/rss.xml?html "Fefe"
 https://alternativlos.org/alternativlos.rss "alternativlos"
-https://www.lesswrong.com/feed.xml?view=curated-rss "~LessWrong 2.0 Curated"
+https://www.lesswrong.com/feed.xml?view=curated-rss "LessWrong 2.0 Curated"
 https://guru.multimedia.cx/feed/ "~Lair Of The Multimedia Guru"
-https://mjg59.dreamwidth.org/data/rss ~Matthew Garrett - Dreamwidth Studios"
-http://allanmcrae.com/feed/ ~Allan McCrae"
+https://mjg59.dreamwidth.org/data/rss "Matthew Garrett - Dreamwidth Studios"
+http://allanmcrae.com/feed/ "Allan McCrae"
 
 
 # As you might have noticed, feeds http://example.org/feed1.xml and
@@ -46,6 +46,183 @@ http://allanmcrae.com/feed/ ~Allan McCrae"
 # section, you must declare the beginning of the "Global" section:
 @ Global
 http://example.org/feed7.xml "Weather warnings"
+
+@ Youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCkf4VIqu3Acnfzuk3kRIFwA "gotbletu"                              #gobletu
+https://www.youtube.com/feeds/videos.xml?channel_id=UCYeiozh-4QwuC1sjgCmB92w "DevOps"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCbftBe1WNc1MBP_bWPDUHXg "Bastel Nerd""
+https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg "distrotube"                            #distrotube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCZiL6BoryLWxyapUuVYW27g "avg Linux User"                        #avg linux user
+https://www.youtube.com/feeds/videos.xml?channel_id=UCg6gPGh8HU2U01vaFCAsvmQ "Chris Titus"                           #chris titus
+https://www.youtube.com/feeds/videos.xml?channel_id=UCS97tchJDq17Qms3cux8wcA "Chris at machine"                      #chris at machine
+https://www.youtube.com/feeds/videos.xml?channel_id=UCUuWlKrLVaR6_yTckhLG7hg "Linux Leech"                           #linux leech
+https://www.youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA "Brodie"                                #Brodie
+https://www.youtube.com/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA "Mental Outlaw"                         #Mental Outlaw
+https://www.youtube.com/feeds/videos.xml?channel_id=UCngn7SVujlvskHRvRKc1cTw "Bugs Writer"                           #Bugs Writer
+https://www.youtube.com/feeds/videos.xml?channel_id=UCorzANoC3fX9VVefJHM5wtA "Mick Janetakis"                        #Nick Janetakis
+https://www.youtube.com/feeds/videos.xml?channel_id=UCmO_G49F6QTFS5CPUfuQADg "Spartan Cup Of Linux"                  #Sparty Cup of Linux
+https://www.youtube.com/feeds/videos.xml?channel_id=UCsnGwSIHyoYN0kiINAGUKxg "Wolf Gang"                             #Wolf Gang
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "Luke Smith"                            #Luke Smith
+https://www.youtube.com/feeds/videos.xml?channel_id=UCi8XrDg1bK_MJ0goOnbpTMQ "Budlabs"                               #Budlabs
+https://www.youtube.com/feeds/videos.xml?channel_id=UCJYVW4HVrMWpUvvsjPQc8-Q "Dorian Dot Slash"                      #Dorian Dot Slash
+https://www.youtube.com/feeds/videos.xml?channel_id=UCJetJ7nDNLlEzDLXv7KIo0w "Gavin Freeborn"                        #Gavin Freeborn
+https://www.youtube.com/feeds/videos.xml?channel_id=UCJdmdUp5BrsWsYVQUylCMLg "Arco Linux"                            #Arco Linux
+https://www.youtube.com/feeds/videos.xml?channel_id=UCfLsPYDDrGaFc9XhfDM-ktA "Null Byte"                             #Null Byte
+https://www.youtube.com/feeds/videos.xml?channel_id=UCSQYuWtcINqtwG3n6Vvb-0w "Mario"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCXuqSBlHAE6Xw-yeJA0Tunw "Linus Tech Tips"
+@ Youtube Comedy
+https://www.youtube.com/feeds/videos.xml?channel_id=UCtUqetWlf7GCvbbAqhI8fnA "i know i am awesome"                   #i know i am awesome
+https://www.youtube.com/feeds/videos.xml?channel_id=UCOOMgoGO9PwAb65v6Zyj43w "Nik Tek"                               #Nik Tek
+https://www.youtube.com/feeds/videos.xml?channel_id=UCeeFfhMcJa1kjtfZAGskOCA "Technlinked"                           #Technlinked
+https://www.youtube.com/feeds/videos.xml?channel_id=UCj22tfcQrWG7EMEKS0qLeEg "Carry Minati"                          #Carry Minati
+https://www.youtube.com/feeds/videos.xml?channel_id=UCeE3lj6pLX_gCd0Yvns517Q "oozy man"                              #oozy man
+https://www.youtube.com/feeds/videos.xml?channel_id=UCqwUrj10mAEsqezcItqvwEw "BB Ki Vines"                           #BB Ki Vines
+@ Youtube Unsorted
+
+https://www.youtube.com/feeds/videos.xml?channel_id=UC5D4Z4yflDZ3_3B02ozo5jg "Jogabilidade TV"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC4LewKZKQecmfRbHI1Rzh5A "Nautilus Link" 
+https://www.youtube.com/feeds/videos.xml?channel_id=UCdG_1TD3L_vRaXZOWDide_Q "Narrativando"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCFzWAEPDGiY34bGpwM_DWmA "Resonant arc"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCY3A_5R_m3PXCn5XDhvBBsg "Architect of Games"
+https://www.youtube.com/feeds/videos.xml?playlist_id=PLc38fcMFcV_s7Lf6xbeRfWYRt7-Vmi_X9 "Game Maker's Toolkit"
+https://www.youtube.com/feeds/videos.xml?playlist_id=PL1cvljv8vQmQOpPYEoDelidg4A3SciA-B "Gamer's little playground - Game Movies"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC0fDG3byEcMtbOqPMymDNbw "Noclip - Video Game Documentaries"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCJfJWct8jN1RpCuVWk3zHTA "Daryl Talks Games"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCNOVwMpD-5A1xzcQGbIHNeA "Design Docs"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCZq_CYXRoRjKqidapMPujaQ "Entre Planos"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCtGoikgbxP4F3rgI9PldI9g "Super Eyepatch Wolf"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCv3LuuW8auzYw1SdLmiLRAw "Totally Not Mark"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCPlWv88ZRMxCcK3BGjrX7ew "Writing on Games"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCBs2Y3i14e1NWQxOGliatmg "Mother's Basement"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCxO_ya-RmAXCXJCU54AxYFw "New Frame Plus"
+
+@ Reddit
+https://www.reddit.com/r/bash.rss "linux bash"
+https://www.reddit.com/r/neovim.rss "neovim"
+https://www.reddit.com/r/usefulscripts.rss "Useful Scripts"
+https://www.reddit.com/r/hyprland/.rss "Hyprland"
+https://www.reddit.com/r/opensource/.rss "OpenSource"
+https://www.reddit.com/r/commandline/.rss "commandline"
+https://www.reddit.com/r/archlinux/.rss "Arch Reddit"
+https://www.reddit.com/user/C4rnAg3.rss "Bangladeshi Bash"
+
+@ Blogs
+https://www.archlinux.org/feeds/news/ "Archlinux Blog"
+https://opensource.com/taxonomy/term/6803/feed "Opensource.com"
+https://www.howtogeek.com/feed/ "howtogeek"
+https://www.topbug.net/blog/category/unix-variants/gnu-linux/feed/ "TopBugs"
+http://lukesmith.xyz/rss.xml "Luke Smith Blog"
+https://blog.fefe.de/rss.xml?html "Fefe Blog"
+https://alternativlos.org/alternativlos.rss "Blog alternativlos"
+https://www.lesswrong.com/feed.xml?view=curated-rss "Blog LessWrong 2.0 Curated"
+https://guru.multimedia.cx/feed/ "Lair Of The Multimedia Guru"
+https://mjg59.dreamwidth.org/data/rss "Matthew Garrett - Dreamwidth Studios"
+http://allanmcrae.com/feed/ "Allan McCrae"
+
+@ Podcasts
+https://feeds.fireside.fm/woff/rss "Watch Out for Fireballs"
+https://retronauts.libsyn.com/rss "Retronauts"
+https://feeds.soundcloud.com/users/soundcloud:users:28089755/sounds.rss "State of the arc (Resonant arc podcast)"
+http://feeds.feedburner.com/themothpodcast "The Moth"
+
+@ Coding
+https://lore.kernel.org/kernelnewbies/new.atom "Kernel Newbies Mailing List"
+http://nullprogram.com/feed "Chris Wellons - null program"
+http://www.kroah.com/log/index.rss "Greg Kroah-Hartman - linux kernel monkey log"
+https://lkml.org/rss.php "Linux Kernel Mailing List"
+# https://github.com/alyptik.private.atom?token=AOoGngGUPMOcRMk5QT_z7JCXV0eGOcGuks66JAODwA== "Coding" "~GitHub Stars"
+#https://github.com/alyptik.private.atom?token=AOoGngGUPMOcRMk5QT_z7JCXV0eGOcGuks66JAODwA== "Coding" "~GitHub Activity"
+https://jvns.ca/atom.xml "Julia Evans"
+https://lobste.rs/rss "Lobsters"
+http://nedbatchelder.com/blog/rss.xml "Ned Batchelder's blog"
+http://matt.might.net/articles/feed.rss "Matt Might's blog"
+
+@ Linux
+
+http://feeds.feedburner.com/Phoronix "Phoronix"
+https://www.archlinux.org/feeds/news/ "Arch Linux News"
+http://lwn.net/headlines/newrss "LWN"
+http://www.linuxjournal.com/node/feed "Linux Journal"
+http://www.linuxinsider.com/perl/syndication/rssfull.pl "LinuxInsider"
+#https://stackoverflow.com/jobs/feed?r=true&tl=c+c%2b%2b+perl+python+ "~StackOverflow Jobs"
+#https://stackoverflow.com/jobs/feed?r=true&tl=c+kernel+ "~StackOverflow C Jobs"
+https://www.ghacks.net/category/operating-systems/linux/feed/ "gHacks Linux"
+https://www.omgubuntu.co.uk/feed "omgubuntu"
+
+@ Politik
+
+https://schwarzerpfeil.de/feed/ "Schwarzerpfeil"
+https://netzpolitik.org/feed/ "Netzpolitik.org"
+https://lowerclassmag.com/feed/ "lowerclassmag"
+https://crimethinc.com/feed "crimethinc"
+https://www.heise.de/tp/news-atom.xml "Heise News"
+https://revoltmag.org/feeds/articles.rss "Revoltmag"
+https://publish.barrikade.info/spip.php?page=backend "Barrikade"
+https://enough-is-enough14.org/feed/ "Enough Is Enough"
+https://www.ajourmag.ch/feed/ "ajourmag.ch"
+https://www.xn--untergrund-blttle-2qb.ch/rss/aktuelle_artikel.rss "XN Untergrund"
+https://www.graswurzel.net/gwr/feed/ "Graswurzel"
+https://steigerlegal.ch/feed/ "Steigerlegal.ch"
+https://www.antifainfoblatt.de/rss.xml "antifainfoblatt"
+https://perspektive-online.net/feed/ "perspektive-online"
+
+@ IT
+https://insanity.industries/index.xml "Insanity"
+https://solar.lowtechmagazine.com/feeds/all-en.atom.xml "solar lowtech"
+https://inside-it.ch/rss.xml "inside-IT"
+https://blog.wesleyac.com/feed.xml "wesleyac"
+https://www.theguardian.com/uk/technology/rss "theguardian"
+https://hnrss.org/frontpage "Hacker News"
+https://linuxiac.com/feed/ "Linuxiac"
+https://www.basicthinking.de/blog/feed/ "basicthinking"
+https://rss.golem.de/rss.php?feed=RSS2.0 "golem"
+https://www.zdnet.de/feed/ "zdnet"
+http://feeds.feedburner.com/linuxnewsde?fmt=xml "linuxnewsde"
+https://www.heise.de/rss/heise-atom.xml "Heise"
+https://feeds.feedburner.com/netzwelt "Netzwelt"
+https://scheible.it/feed/ "Scheible IT"
+https://hackaday.com/blog/feed/ "hackaday"
+http://feeds.arstechnica.com/arstechnica/index "arstechnica"
+https://t3n.de/rss.xml "t3n"
+https://www.theregister.com/headlines.atom "theregister"
+https://paper.wf/kubikpixel/feed/ "kubikpixel"
+https://mialikescoffee.com/feed.xml "mialikescoffee"
+
+@ Security
+https://www.ghacks.net/feed "gHacks"
+https://threatpost.com/feed "threatpost"
+https://www.welivesecurity.com/deutsch/feed/ "welivesecurity"
+https://micahflee.com/feed.xml "micahflee"
+https://secret.club/feed "Secret.club"
+http://www.blackmoreops.com/feed/ "blackmoreops"
+https://www.dr-datenschutz.de/feed/ "dr-datenschutz"
+https://mobilsicher.de/feed "mobilsicher"
+https://www.kuketz-blog.de/feed/ "kuketz-blog"
+https://tarnkappe.info/feed/ "tarnkappe"
+https://blog.fdik.org/rss "fdik"
+https://www.schneier.com/feed/atom/ "schneier"
+https://www.privacyinternational.org/rss.xml "privacyinternational"
+
+@ Musik
+https://www.prettyinnoise.de/feed "prettyinnoise"
+http://kaput-mag.com/de/feed/ "kaput-mag"
+https://www.deaf-forever.de/feed "deaf-forever"
+
+@ News
+#https://www.infosperber.ch/inc/rss.cfm "News"
+https://infosperber.ch/shoutemfeed "infosperber"
+https://www.woz.ch/t/startseite/feed "woz.ch"
+#https://rss.sueddeutsche.de/app/service/rss/alles/index.rss?output=rss "News"
+https://rss.sueddeutsche.de/alles "sueddeutsche"
+https://www.handelsblatt.com/contentexport/feed/schlagzeilen "handelsblatt"
+https://rss.orf.at/news.xml "orf"
+https://www.srf.ch/news/bnf/rss/1646 "srf"
+https://www.spiegel.de/schlagzeilen/index.rss "Spiegel"
+https://partner-feeds.publishing.tamedia.ch/rss/landbote/ticker "Landbote"
+https://www.theverge.com/rss/index.xml "TheVerge"
+https://www.derstandard.at/rss "derstandard"
+https://amerika21.de/feed "amerika21"
+
 
 # You can subscribe to any feed you can get through a command. For
 # example, if you can get a Gemini atom feed with the program
