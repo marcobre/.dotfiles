@@ -3,27 +3,25 @@
 # Lines with # character at the beginning are comments - they are ignored.
 
 # To subscribe to a feed, you have to add a line with its URL:
-http://example.org/feed1.xml
+#http://example.org/feed1.xml
 
 # If you want to assign a custom name to the feed,
 # put a double quoted string after its URL:
-http://example.org/feed2.xml "Faculty notifications"
+#http://example.org/feed2.xml "Faculty notifications"
 
 # Lines with @ character at the beginning are section declarations,
 # they are used to organize your feed entries and process them in groups.
 # All feed entries after this declaration will belong to this section.
-@ News Reports
-http://example.org/feed3.xml "Local news"
+#@ News Reports
+#http://example.org/feed3.xml "Local news"
 
 # This feed entry belongs to the "News Reports" section:
-http://example.org/feed4.xml "Global news"
+#http://example.org/feed4.xml "Global news"
 
 # Another section declaration will cause next feed entries to be added to the
 # corresponding section. Thus, the following feed entries will not belong to
 # the "News Reports" section, but to the "Blog Posts" section.
 @ Blog Posts
-http://example.org/feed5.xml "John Johnson"
-http://example.org/feed6.xml "Peter Peterson"
 
 https://www.archlinux.org/feeds/news/ "Archlinux"
 https://opensource.com/taxonomy/term/6803/feed "open source linux"
@@ -79,9 +77,6 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCeE3lj6pLX_gCd0Yvns517Q "oo
 https://www.youtube.com/feeds/videos.xml?channel_id=UCqwUrj10mAEsqezcItqvwEw "BB Ki Vines"                           #BB Ki Vines
 @ Youtube Unsorted
 
-https://www.youtube.com/feeds/videos.xml?channel_id=UC5D4Z4yflDZ3_3B02ozo5jg "Jogabilidade TV"
-https://www.youtube.com/feeds/videos.xml?channel_id=UC4LewKZKQecmfRbHI1Rzh5A "Nautilus Link" 
-https://www.youtube.com/feeds/videos.xml?channel_id=UCdG_1TD3L_vRaXZOWDide_Q "Narrativando"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCFzWAEPDGiY34bGpwM_DWmA "Resonant arc"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCY3A_5R_m3PXCn5XDhvBBsg "Architect of Games"
 https://www.youtube.com/feeds/videos.xml?playlist_id=PLc38fcMFcV_s7Lf6xbeRfWYRt7-Vmi_X9 "Game Maker's Toolkit"
@@ -89,7 +84,6 @@ https://www.youtube.com/feeds/videos.xml?playlist_id=PL1cvljv8vQmQOpPYEoDelidg4A
 https://www.youtube.com/feeds/videos.xml?channel_id=UC0fDG3byEcMtbOqPMymDNbw "Noclip - Video Game Documentaries"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCJfJWct8jN1RpCuVWk3zHTA "Daryl Talks Games"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCNOVwMpD-5A1xzcQGbIHNeA "Design Docs"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCZq_CYXRoRjKqidapMPujaQ "Entre Planos"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCtGoikgbxP4F3rgI9PldI9g "Super Eyepatch Wolf"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCv3LuuW8auzYw1SdLmiLRAw "Totally Not Mark"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCPlWv88ZRMxCcK3BGjrX7ew "Writing on Games"
@@ -203,29 +197,30 @@ https://blog.fdik.org/rss "fdik"
 https://www.schneier.com/feed/atom/ "schneier"
 https://www.privacyinternational.org/rss.xml "privacyinternational"
 
-@ Musik
-https://www.prettyinnoise.de/feed "prettyinnoise"
-http://kaput-mag.com/de/feed/ "kaput-mag"
-https://www.deaf-forever.de/feed "deaf-forever"
-
 @ News
 #https://www.infosperber.ch/inc/rss.cfm "News"
 https://infosperber.ch/shoutemfeed "infosperber"
-https://www.woz.ch/t/startseite/feed "woz.ch"
+#https://www.woz.ch/t/startseite/feed "woz.ch"
 #https://rss.sueddeutsche.de/app/service/rss/alles/index.rss?output=rss "News"
 https://rss.sueddeutsche.de/alles "sueddeutsche"
 https://www.handelsblatt.com/contentexport/feed/schlagzeilen "handelsblatt"
-https://rss.orf.at/news.xml "orf"
-https://www.srf.ch/news/bnf/rss/1646 "srf"
+#https://rss.orf.at/news.xml "orf"
+#https://www.srf.ch/news/bnf/rss/1646 "srf"
 https://www.spiegel.de/schlagzeilen/index.rss "Spiegel"
 https://partner-feeds.publishing.tamedia.ch/rss/landbote/ticker "Landbote"
 https://www.theverge.com/rss/index.xml "TheVerge"
 https://www.derstandard.at/rss "derstandard"
 https://amerika21.de/feed "amerika21"
 
+@ Musik
+https://www.prettyinnoise.de/feed "prettyinnoise"
+http://kaput-mag.com/de/feed/ "kaput-mag"
+https://www.deaf-forever.de/feed "deaf-forever"
+
+
 
 # You can subscribe to any feed you can get through a command. For
 # example, if you can get a Gemini atom feed with the program
 # 'gemget', then you might do this (note the silencing flags, so you
 # don't spook the terminal while newsraft is running).
-$(gemget -sq gemini://example.org/feed8.xml) "Reasons to use Gemini"
+#$(gemget -sq gemini://example.org/feed8.xml) "Reasons to use Gemini"
