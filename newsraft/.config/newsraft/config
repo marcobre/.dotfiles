@@ -19,3 +19,9 @@ bind m exec mpv --no-terminal "%l" &
 
 # This will launch mpv interactively.
 bind M exec mpv "%l"
+
+
+set menu-feed-sorting alphabet-desc
+set menu-item-sorting unread-desc
+
+bind E exec nvim "~/.config/newsraft/feeds"
