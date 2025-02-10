@@ -134,7 +134,7 @@ alias port='cd $(cat ~/.sd)'
 alias music="ncmpcpp"
 alias clock="ncmpcpp -s clock"
 alias visualizer="ncmpcpp -s visualizer"
-alias news="newsboat"
+alias news="newsraft"
 alias email="mutt"
 alias files="ranger"
 alias chat="weechat"
@@ -142,7 +142,7 @@ alias audio="alsamixer"
 alias calender="calcurse"
 
 #Some aliases
-alias v="nvim-marcom"
+alias v="nvim-lazyvim"
 alias ka="killall"
 alias sv="sudo nvim"
 alias r="ranger"
