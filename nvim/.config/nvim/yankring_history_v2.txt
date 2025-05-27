@@ -1,0 +1,45 @@
+#,v
+bindsym XF86PowerOff		exec sudo shutdown -h now,V
+ym XF86AudioRaiseVolume	exec $inc,V
+binds,v
+alias h="cd ~ && ls -a",V
+    bindsym $mod+Shift+0 move container to workspace number 10,V
+aps,v
+ | xargs swaymsg exec --,v
+# Create Both,V
+dd#Expunge Both,V
+SyncState *,V
+2,v
+[General]Binary = calcursehostname : cloud.area030.orgPath = /remote.php/dav/calendars/marcom/personal/AuthMethod = basicHTTPS = YesDryRun = NoVerbose = Yes[Auth]Username = marcomPassword = $CALCURSE_CALDAV_PASSWORD,v
+3 ,v
+ 󰒱",v
+",v
+ ,v
+ ,v
+assign [class="Firefox"] $workspace2,v
+"set $workspace6 "6 "set $workspace7 "7 "set $workspace8 "8 "set $workspace9 "9 "set $workspace10 "10 "# move focused container to workspacebindsym $mod+Shift+1 move container to workspace $workspace1bindsym $mod+Shift+2 move container to workspace $workspace2bindsym $mod+Shift+3 move container to workspace $workspace3bindsym $mod+Shift+4 move container to workspace $workspace4bindsym $mod+Shift+5 move container to workspace $workspace5bindsym $mod+Shift+6 move container to workspace $workspace6bindsym $mod+Shift+7 move container to workspace $workspace7bindsym $mod+Shift+8 move container to workspace $workspace8bindsym $mod+Shift+9 move container to workspace $workspace9bindsym $mod+Shift+0 move container to workspace $workspace10,v
+,V
+command=$SCRIPT_DIR/rofi-calendar,V
+NATURAL_MAPPING=1,V
+separator=true,V
+#exec --no-startup-id spotify,V
+,V
+" copy and paste -------------------------vmap <C-c> "*yivmap <C-x> "*cvmap <C-v> c<ESC>"*pimap <C-v> <ESC>"*pa" copy and pasteset go+=a               " Visual selection automatically copied to the clipboard,v
+" copy and paste -------------------------vmap <C-c> "*yivmap <C-x> "*cvmap <C-v> c<ESC>"*pimap <C-v> <ESC>"*pa" copy and pasteset go+=a               " Visual selection automatically copied to the clipboard,v
+From OS Clipboard,v
+imap <C-v> <ESC>"*pa,V
+imap <C-v> <ESC>a,V
+imap <C-v> <ESC>"*pa,v
+" copy and paste,V
+" copy and paste,v
+,V
+set go+=a               " Visual selection automatically copied to the clipboard,v
+t go+=a               " Visual selection automatically copied to the clipboard,V
+" copy and pastevmap <C-c> "+yivmap <C-x> "+cvmap <C-v> c<ESC>"+pimap <C-v> <ESC>"+pa,v
+vnorem,V
+",v
+set clipboard+=unnamedplus,V
+set $workspace1 "1 "set $workspace2 "2 "set $workspace3 "3 "set $workspace4 "4 "set $workspace5 "5 "set $workspace6 "6 "set $workspace7 "7 "set $workspace8 "8 "set $workspace9 "9 "set $workspace10 "10 ",v
+#include "/home/<USER>/.cache/wal/colors-wal-dwm.h",v
+ ,v
+function nvims() {  items=("default" "nvim" "nvim-kickstart" "nvim-lazyvim" "nvim-fisavim")  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)  if [[ -z $config ]]; then    echo "Nothing selected"    return 0  elif [[ $config == "default" ]]; then    config=""  fi  NVIM_APPNAME=$config nvim $@},v
