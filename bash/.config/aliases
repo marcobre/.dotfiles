@@ -21,11 +21,17 @@ cat ~/.cache/wallust/sequences
 alias ls='lsd -lA --group-directories-first'
 #alias ls='lsd'
 #alias sb="cd ~/Nextcloud/Obsidian/ && ls -a"
+
 alias sb="cd ~/Syncthing/ && ls -a"
+
+alias nv="nvim-lazy"
 # set variable and alias for calcurse pass usage
 CALCURSE_CALDAV_PASSWORD=$(pass show area030.org)
 alias calsync="CALCURSE_CALDAV_PASSWORD=$(pass show area030.org) calcurse-caldav"
 
+# Screenshare portal
+
+alias screenshare="~/.config/hypr/scripts/PortalHyprland.sh"
 # Webcam aliases
 
 alias dellcam="mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video4"
