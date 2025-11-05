@@ -1,0 +1,9 @@
+auto-save-list
+init.el
+eaf
+early-init.el
+eln-cache
+straight/build
+straight/build-cache.el
+straight/repos
+
