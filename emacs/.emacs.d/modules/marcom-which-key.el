@@ -1,6 +1,6 @@
 (use-package which-key
   :straight (:build (:not native-compile))
-  :diminish
+  ;; :diminish ;; used to hide which-key in the modeline
   :custom
   (which-key-idle-secondary-delay 0.01)
   (which-key-dont-use-unicode t)
