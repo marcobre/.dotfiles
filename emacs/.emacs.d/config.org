@@ -314,7 +314,7 @@ This module includes the Theme, modeline and font config
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 #+END_SRC
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-vertico.el
+#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-vertico.el"
 (use-package all-the-icons-completion
   :after (marginalia)
   :init (all-the-icons-completion-mode))
@@ -323,7 +323,7 @@ This module includes the Theme, modeline and font config
 #+END_SRC
 *** The =marcom-vertico.el= extended search and direct actions
 #+BEGIN_SRC emacs-lisp :tangle "modules/marcom-vertico.el"
-i(use-package consult
+(use-package consult
   :after vertico
   :bind (("C-s" . consult-line)
          ("M-g i" . consult-imenu)))
@@ -344,7 +344,7 @@ i(use-package consult
 (provide 'marcom-vertico)
 ;;; marcom-vertico.el ends here
 #+end_src
-* The =marcom-which-key= module section 
+** The =marcom-which-key= module section 
 Which-key is an indispensable tool for charting the turbulent waters of Emacs’ 
 packages keybindings. These suggestions prove incredibly useful when venturing 
 into the realm of a new package.
@@ -352,7 +352,7 @@ into the realm of a new package.
 #+BEGIN_SRC emacs-lisp :tangle "modules/marcom-which-key.el"
 (use-package which-key
   :straight (:build (:not native-compile))
-  :diminish
+  ;; :diminish ;; used to hide which-key in the modeline
   :custom
   (which-key-idle-secondary-delay 0.01)
   (which-key-dont-use-unicode t)

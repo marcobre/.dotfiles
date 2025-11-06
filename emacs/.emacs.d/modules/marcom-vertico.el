@@ -15,7 +15,13 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
-i(use-package consult
+(use-package all-the-icons-completion
+  :after (marginalia)
+  :init (all-the-icons-completion-mode))
+(use-package all-the-icons
+  :if (display-graphic-p))
+
+(use-package consult
   :after vertico
   :bind (("C-s" . consult-line)
          ("M-g i" . consult-imenu)))
