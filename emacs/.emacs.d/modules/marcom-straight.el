@@ -15,10 +15,10 @@
 
 (setq straight-vc-git-default-clone-depth 1)
 
-(straight-use-package 'use-package)
-(use-package straight
-  :custom (straight-use-package-by-default t)
-  :bind  (("C-<f2>" . hydra-straight-helper/body)))
+  (straight-use-package 'use-package)
+  (use-package straight
+    :custom (straight-use-package-by-default t)
+    :bind  (("C-<f2>" . hydra-straight-helper/body)))
 
 ;;; Provide
 (provide 'marcom-straight)
