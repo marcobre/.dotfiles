@@ -1,448 +1,3 @@
- #+title: GNU Emacs configuration
-#+author: Marco Bretzke
-#+email: marcom@area030.org
-#+language: en
-#+options: ':t toc:nil num:t author:t email:t
-#+startup: content indent
-#+macro: latest-export-date (eval (format-time-string "%F %T %z"))
-#+macro: word-count (eval (count-words (point-min) (point-max)))
-
-[ Last revised and exported on *{{{latest-export-date}}}* with a word
-  count of *{{{word-count}}}*. ]
-
-This is my literate Emacs configuration file. Following the idea and structure
-of Prot <https://github.com/protesilaos/dotfiles/blob/master/emacs/.emacs.d/prot-emacs.org>
-to not tangle a single org file on startup as it is very slow and loads org 
-each time i start emacs. 
-I am using this file as my main source of truth and all my configurations are
-generated from here in sepeated modules. This makes troubleshooting much easier 
-and the parts can be called or shared individually.
-After editing this filei can either evaluate by pressing =C-c C-v C-t= or by
-evaluating the following code block to update all the files. 
-
-#+begin_src emacs-lisp :tangle no :results none
-(org-babel-tangle)
-#+end_src
-
-* Structure of the Emacs configuration
-  - The current config.org file
-  - early-init.el 
-  - init.el
-  - modules folder
-
-* The early initialization (=early-init.el=)
-A few of the code blocks tangle to =early-init.el= to get the effects in the 
-very beginning of the initialization.
-
-* Main initialization (=init.el=)
-To comply with the Emacs [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html][conventions]] for libraries, the tangled =init.el= must have the following header and [[sec:foot][footer]]:
-
-** The =init.el= Header
-
-#+begin_src emacs-lisp :tangle init.el
-  ;;; init.el --- Marco's Emacs configuration -*- lexical-binding: t -*-
-
-  ;; Copyright (C) 2025 Marco Bretzke
-
-  ;; Author: Marco Bretzke <gmail.com>
-  ;; Keywords: internal
-  ;; URL: https://marcobre.github.comio/emacsd/
-
-  ;;; Commentary:
-  ;; A modularized literate Emacs configuration 
-
-  ;;; Code:
-#+end_src
-** The =init.el= essential settings
-Here we define some basic UI settings independent from any packages
-#+begin_src emacs-lisp :tangle init.el
-
-           ;; Disable autosaving and backups and lockfiles
-           auto-save-default nil
-           backup-inhibited nil
-           create-lockfiles nil
-           ;;(setq make-backup-files nil) ;; stop creating those backup~ files
-           ;;(setq auto-save-default nil) ;; stop creating those #autosave# files
-           ;; Allow 20MB of memory (instead of 0.76MB default) before calling
-           ;; garbage collection. This means GC runs less often, which speeds
-           ;; up some operations
-           (setq gc-cons-threshold 20000000)
-           (setq inhibit-startup-message t)
-           (scroll-bar-mode -1)        ; Disable visible scrollbar
-           (tool-bar-mode -1)          ; Disable the toolbar
-           (tooltip-mode -1)           ; Disable tooltips
-           (set-fringe-mode 10)        ; Give some breathing room
-           ;;(menu-bar-mode -1)            ; Disable the menu bar
-
-           (setq context-menu-mode t) ; new context menue used with right mouse button in emacs28 https://www.masteringemacs.org/article/whats-new-in-emacs-28-1
-           ;; Set up the visible bell
-           (setq visible-bell t)
-           ;; line number settings
-           (column-number-mode)
-           (global-display-line-numbers-mode t)
-           ;; Set frame transparency
-           ;; Make frame transparency overridable
-           (defvar mb/frame-transparency '(90 . 90))
-               (set-frame-parameter (selected-frame) 'alpha mb/frame-transparency)
-               (add-to-list 'default-frame-alist `(alpha . ,mb/frame-transparency))
-           ;; (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-           ;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-           ;; Disable line numbers for some modes
-
-           (dolist (mode '(org-mode-hook
-                           shell-mode-hook
-                           treemacs-mode-hook
-                           eshell-mode-hook))
-           (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-           ;; y or n is enough
-           (fset 'yes-or-no-p 'y-or-n-p)
-
-        (use-package savehist :init (savehist-mode 1))
-           ;;:bind
-           ;;(;; Make ESC close prompts
-           ;; ("<escape>" . keyboard-escape-quit)
-           ;; ("C-c C-r" . revert-buffer-no-confirm)))
-#+end_src
-
-** The =init.el= Load Path for the modules and lisp subfolders
-  I am currently trying out to split this single config into seperate modules
-  by tangling them into a modules subfolder and loading them with require
-
-#+begin_src emacs-lisp :tangle "init.el"
-
-  ;;; Add modules and lisp subfolders of emacs.d to load path
-  (dolist (path (list (expand-file-name "modules" user-emacs-directory)
-                      (expand-file-name "lisp" user-emacs-directory)))
-    (add-to-list 'load-path path))
-#+end_src
-
-** The =init.el= Module List to be loaded
-Load modules as require statement from the path
-
-#+begin_src emacs-lisp :tangle "init.el"
-  ;;;; Modules
-  (require 'marcom-straight)
-  (require 'marcom-which-key)
-  (require 'marcom-vertico)
-  (require 'marcom-theme)
-  (require 'marcom-keybindings)
-  (require 'marcom-org)
-#+end_src
-
-* My Emacs Module configurations
-
-** The =marcom-straight.el= module
-This module loads the straight.el package manager and deactivates the package.el
-*** Installation & Initialization of straight.el
-Taken from: https://github.com/raxod502/straight.el#getting-started
-
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-straight.el"
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (locate-user-emacs-file "straight/repos/straight.el/bootstrap.el"))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
-#+END_SRC
-
-*** Settings for straight.el
-Straight uses symlinks in the =build= directory which causes
-=xref-find-definition= to ask ="Symbolic link to Git-controlled source
-file; follow link? (y or n)"= every time, to always answer =yes=, set
-=vc-follow-symlinks= true.
-
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-straight.el"
-(setq vc-follow-symlinks t)
-#+END_SRC
-
-Use default depth of 1 when cloning files with git to get savings on network
-bandwidth and disk space.
-
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-straight.el"
-(setq straight-vc-git-default-clone-depth 1)
-#+END_SRC
-(setq package-enable-at-startup nil)
-*** Notes
-- =M-x straight-pull-all=: update all packages.
-- =M-x straight-normalize-all=: restore all packages (remove local edits)
-- =M-x straight-freeze-versions= and =M-x straight-thaw-versions= are like =pip
-  freeze requirements.txt= and =pip install -r requirements.txt=
-- To tell straight.el that you want to use the version of Org shipped with
-  Emacs, rather than cloning the upstream repository:
-(Note: ":tangle no")
-
-#+BEGIN_SRC emacs-lisp :tangle no
-(use-package org
-  :straight (:type built-in))
-#+END_SRC
-
-In order to use =straight.el= properly, we need to add the following content to our =early-init.el= file:
-
-#+begin_src emacs-lisp :tangle early-init.el
-  ;;; early-init.el --- Emacs early init file  -*- lexical-binding: t; -*-
-  ;;; Commentary:
-  ;; Code to run before init.el is loaded.
-  ;;; Code:
-
-  ;; Disable package.el
-  (setq package-enable-at-startup nil)
-
-  (provide 'early-init)
-  ;;; early-init.el ends here
-#+end_src
-*** The =marcom-straight-el= integration of use-package
-We can also have a nice integration with =use-package=:
-
-#+begin_src emacs-lisp :tangle "modules/marcom-straight.el"
-  (straight-use-package 'use-package)
-  (use-package straight
-    :custom (straight-use-package-by-default t)
-    :bind  (("C-<f2>" . hydra-straight-helper/body)))
-#+end_src
-
-*** The =marcom-straight.el= call to provide
-
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-straight.el"
-;;; Provide
-(provide 'marcom-straight)
-;;; marcom-straight.el ends here
-#+end_src
-
-For reference, I still show here how to set =use-package= with =package.el=. First we add the GNU ELPA
-and MELPA archives, and then require =use-package=:
-
-#+begin_src emacs-lisp :tangle no
-  (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                           ("melpa" . "https://melpa.org/packages/"))
-        package-quickstart nil)
-
-  (eval-and-compile
-    (unless (and (fboundp 'package-installed-p)
-                 (package-installed-p 'use-package))
-      (package-refresh-contents)
-      (package-install 'use-package))
-    (if init-file-debug  
-        (setq use-package-compute-statistics t)
-      (setq use-package-compute-statistics nil))
-    (setq use-package-always-ensure t)
-    (setq use-package-expand-minimally t)
-    (require 'use-package))
-#+end_src
-
-** The =marcom-theme.el= module
-This module includes the Theme, modeline and font config
-*** Font Setup
-
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-theme.el"
-  ;; You will most likely need to adjust this font size for your system!
-  (defvar mb/default-font-size 140)
-  (defvar mb/default-variable-font-size 140)
-
-  ;; Font Selection
-  (set-face-attribute 'default nil :font "Fira Code Retina" :height mb/default-font-size)
-
-  ;; Set the fixed pitch face
-  (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height mb/default-font-size)
-
-  ;; Set the variable pitch face
-  (set-face-attribute 'variable-pitch nil :font "Fira Code" :height mb/default-variable-font-size :weight 'regular)
- #+END_SRC
-
-*** Color Theme
-
-[[https://github.com/hlissner/emacs-doom-themes][doom-themes]] is a great set of themes with a lot of variety and support for many different Emacs modes.  Taking a look at the [[https://github.com/hlissner/emacs-doom-themes/tree/screenshots][screenshots]] might help you decide which one you like best.  You can also run =M-x counsel-load-theme= to choose between them easily.
-
-#+begin_src emacs-lisp :tangle "modules/marcom-theme.el"
-(use-package doom-themes
-  :init (load-theme 'doom-outrun-electric t)
-  :config
-    (doom-themes-org-config)
-    ;(setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-    ;(doom-themes-treemacs-config)
-    )
-#+end_src
-
-*** Better Modeline
-
-[[https://github.com/seagle0128/doom-modeline][doom-modeline]] is a very attractive and rich (yet still minimal) mode line configuration for Emacs.  The default configuration is quite good but you can check out the [[https://github.com/seagle0128/doom-modeline#customize][configuration options]] for more things you can enable or disable.
-
-*NOTE:* The first time you load your configuration on a new machine, you'll need to run `M-x all-the-icons-install-fonts` so that mode line icons display correctly.
-
-#+begin_src emacs-lisp :tangle "modules/marcom-theme.el"
-
-(use-package all-the-icons
-  :if (display-graphic-p))
-
-;(use-package doom-modeline
-;  :init (doom-modeline-mode 1)
-;  :custom ((doom-modeline-height 15)
-;           (doom-themes-neotree-config)))
-(use-package doom-modeline
-  :straight t
-  :init (doom-modeline-mode 1)
-  :config
-  (setq doom-modeline-height 55)
-  (setq doom-modeline-buffer-file-name-style 'relative-to-project)
-  (setq doom-line-numbers-style 'relative)
-  (setq doom-modeline-major-mode-icon t)
-  (setq doom-modeline-buffer-state-icon t)
-  (setq doom-modeline-major-mode-color-icon t))
-
-
-#+end_src
-*** The =marcom-theme.el= call to provide
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-theme.el"
-;;; Provide
-(provide 'marcom-theme)
-;;; marcom-theme.el ends here
-#+end_src
-** The =marcom-vertico.el= module with plugins
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-vertico.el"
-(use-package vertico
-  :init (vertico-mode)
-  :config
-;;  (require 'vertico-grid)       ;; Beispiel: Grid-Modus für Datei Completion
-;;  (vertico-grid-mode 1)
-  (require 'vertico-repeat)
-  (require 'vertico-directory))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-vertico.el"
-(use-package marginalia
-  :after vertico
-  :init (marginalia-mode))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-vertico.el"
-(use-package orderless
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion)))))
-#+END_SRC
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-vertico.el"
-(use-package all-the-icons-completion
-  :after (marginalia)
-  :init (all-the-icons-completion-mode))
-(use-package all-the-icons
-  :if (display-graphic-p))
-#+END_SRC
-*** The =marcom-vertico.el= extended search and direct actions
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-vertico.el"
-(use-package consult
-  :after vertico
-  :bind (("C-s" . consult-line)
-         ("M-g i" . consult-imenu)))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-vertico.el"
-(use-package embark
-  :bind (("C-." . embark-act)
-         ("M-." . embark-dwim))
-  :init (setq embark-confirm-act-always nil))
-(use-package embark-consult
-  :after (embark consult))
-#+END_SRC
-
-*** The =marcom-vertico.el= call to provide
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-vertico.el"
-;;; Provide
-(provide 'marcom-vertico)
-;;; marcom-vertico.el ends here
-#+end_src
-** The =marcom-which-key.el= module section 
-Which-key is an indispensable tool for charting the turbulent waters of Emacs’ 
-packages keybindings. These suggestions prove incredibly useful when venturing 
-into the realm of a new package.
-
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-which-key.el"
-(use-package which-key
-  :straight (:build (:not native-compile))
-  ;; :diminish ;; used to hide which-key in the modeline
-  :custom
-  (which-key-idle-secondary-delay 0.01)
-  (which-key-dont-use-unicode t)
-  :config
-  (which-key-mode t))
-;;; Provide
-(provide 'marcom-which-key)
-;;; marcom-which-key.el ends here
-#+END_SRC
-
-** The =marcom-keybindings.el= module section
-Next to som individual keybinings i am using general.el to create my
-owner custom layers.
-*** The =marcom-keybindings.el= general.el definitions
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-keybindings.el"
-;; Make ESC quit prompts
-(use-package general
-  ;;:after evil
-  :config
-  (general-create-definer mb/leader-keys
-     :keymaps '(normal insert visual emacs)
-     :prefix "SPC"
-     :global-prefix "C-SPC")
-  (mb/leader-keys
-    "t"  '(:ignore t :which-key "toggles")
-    "tt" '(counsel-load-theme :which-key "choose theme")
-    "m" '(mu4e :which-key "mu4e")
-    "n" '(hydra-mu4e-headers/body :which-key "mu4e-hydra")
-    ;"c" '(hydra-org-clock/body :which-key "Clocking")
-    "c" '(mb-clocking/body :which-key "Clocking")
-    "g" '(org-boxes-workflow :which-key "GTD Workflow")
-    "SPC" '(mb-gtd-menue/body :which-key "my menue")
-    "e" '(lambda () (interactive) (find-file (expand-file-name "~/.emacs.d/config.org")) :which-key "open config.org")))
-#+END_SRC
-*** The =marcom-keybindings.el= standard remaps
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-keybindings.el"
-;; Use Escape to quit stuff
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-;; Resizing the fonts
-(define-key global-map (kbd "s-=") 'text-scale-increase)
-(define-key global-map (kbd "s--") 'text-scale-decrease)
-
-
-;; Emacs-Config on C-c e
-(global-set-key "\C-ce" '(lambda ()
-                           (interactive)
-                           (find-file "~/.emacs.d/config.org")))
-
-;; Tasks-Datei auf C-c g
-;;(global-set-key "\C-cg" '(lambda ()
-;;                           (interactive)
-;;                           (find-file "~/projects/org/tasks.org")))
-
-;; Übersichtsseite auf C-c s
-;;(global-set-key "\C-cs" '(lambda ()
-;;                           (interactive)
-;;                           (find-file "~/projects/org/start.org")))
-  
-#+END_SRC
-*** The =marcom-keybindings.el= call to provide
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-keybindings.el"
-;;; Provide
-(provide 'marcom-keybindings)
-;;; marcom-keybindings.el ends here
-#+end_src
-** The =marcom-org.el= module section
-
-[[https://orgmode.org/][Org Mode]] is one of the hallmark features of Emacs.  It is a rich document editor, project planner, task and time tracker, blogging engine, and literate coding utility all wrapped up in one package.
-
-*** The =marcom-org.el= Better Font Faces
-
-The =mb/org-font-setup= function configures various text faces to tweak the sizes of headings and use variable width fonts in most cases so that it looks more like we're editing a document in =org-mode=.  We switch back to fixed width (monospace) fonts for code blocks and tables so that they display correctly.
-
-#+begin_src emacs-lisp :tangle "modules/marcom-org.el"
-
   (defun mb/org-font-setup ()
     ;; Replace list hyphen with dot
     (font-lock-add-keywords 'org-mode
@@ -472,16 +27,6 @@ The =mb/org-font-setup= function configures various text faces to tweak the size
     (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
     (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
     (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
-
-#+end_src
-
-*** The =marcom-org.el= Basic Config
-
-
-This section contains the basic configuration for =org-mode= plus the configuration for Org agendas and capture templates.  There's a lot to unpack in here so I'd recommend watching the videos for [[https://youtu.be/VcgjTEa0kU4][Part 5]] and [[https://youtu.be/PNE-mgkZ6HM][Part 6]] for a full explanation.
-
-#+begin_src emacs-lisp :tangle "modules/marcom-org.el"
-
 
   (defun mb/org-mode-setup ()
       (org-indent-mode)
@@ -595,9 +140,6 @@ This section contains the basic configuration for =org-mode= plus the configurat
   (add-hook 'org-shiftleft-final-hook 'windmove-left)
   (add-hook 'org-shiftdown-final-hook 'windmove-down)
   (add-hook 'org-shiftright-final-hook 'windmove-right)
-  #+end_src
-*** Structured templates
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-org.el"
 
 (with-eval-after-load 'org
   ;; This is needed as of Org 9.2
@@ -606,11 +148,6 @@ This section contains the basic configuration for =org-mode= plus the configurat
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("py" . "src python")))
-
-#+END_SRC
-
-*** Org-mode/Agenda Source files
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-org.el"
 
   (defvar org-default-projects-dir   "~/Syncthing/org/projects"                     "Primary GTD directory")
   (defvar org-default-technical-dir  "~/Syncthing/org/technical"                    "Directory of shareable notes")
@@ -641,10 +178,6 @@ This section contains the basic configuration for =org-mode= plus the configurat
      ;; All projectfiles in Agenda
      ;(add-to-list 'org-agenda-files (list org-default-projects-dir))
      ;(add-to-list 'org-agenda-file-regexp "^[a-z0-9-_]+.org")
-   #+END_SRC
-
-*** Org-Agenda View Section
-    #+BEGIN_SRC emacs-lisp :tangle "modules/marcom-org.el"
 
                         ;;  Custom Agenda View Section
                         (setq org-agenda-custom-commands
@@ -681,10 +214,6 @@ This section contains the basic configuration for =org-mode= plus the configurat
                                  (agenda "")))
                                  ))
 
-    #+END_SRC
-*** Org-journal
-   #+BEGIN_SRC emacs-lisp :tangle "modules/marcom-org.el"
-
    (use-package org-journal
     ;;:ensure t
     :defer t
@@ -701,20 +230,12 @@ This section contains the basic configuration for =org-mode= plus the configurat
       ;; Position point on the journal's top-level heading so that org-capture
       ;; will add the new entry as a child entry.
       (goto-char (point-min)))
-   #+END_SRC
-
-*** Org-archive config
-Org-archive will store archives into a subfolder with year/month_archiv ending
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-org.el"
 
 ;; Archive config - move to archive file accordng to month of archiving
 (setq org-archive-location (concat "archive/%s-"
                                   (format-time-string "%Y%m" (current-time))
                                   "_archiv::"))
-#+END_SRC
-*** The =marcom-org.el= ORg-Babel/Codeblock section
-Activate the following languages
-   #+BEGIN_SRC emacs-lisp :tangle "modules/marcom-org.el"
+
    (org-babel-do-load-languages
     'org-babel-load-languages
     '((emacs-lisp . t)
@@ -731,21 +252,7 @@ Activate the following languages
      ;;(C . t)
      (sql . t)
      (ditaa . t)))
-   #+END_SRC
-   Activate Syntax Highlighting in Source Code Blocks
-   #+BEGIN_SRC emacs-lisp
-   (setq org-src-fontify-natively t)
-   #+END_SRC
-   Inline Code evaluation
-   #+BEGIN_SRC emacs-lisp
-   (setq org-confirm-babel-evaluate t)
-   (require 'ob-python)
-   #+END_SRC
-*** The =marcom-org.el= GTD-Hydra section
 
- adopted from http://www.howardism.org/Technical/Emacs/getting-more-boxes-done.html
- 
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-org.el"
 (use-package hydra
   :defer t)
 
@@ -903,43 +410,7 @@ Activate the following languages
             (execute-kbd-macro (kbd "A t")))
      ;; Org Hydra
      (global-set-key (kbd "<f4>") 'hydra-org-refiler/body)
-   #+END_SRC
 
-*** The =marcom-org.el= call to provide
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-org.el"
 ;;; Provide
 (provide 'marcom-org)
 ;;; marcom-org.el ends here
-#+end_src
-
-
-* Example Package Install with use-package
-
-Here are examples of use-package declarations that will install packages using straight.el by default:
-
-#+begin_src emacs-lisp
-;; Install and configure magit
-(use-package magit
-  :defer t
-  :commands (magit-status)
-  :config
-  (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
-
-;; Install and configure which-key
-;;(use-package which-key
-;;  :init
-;;  (which-key-mode)
-;;  :config
-;;  (setq which-key-idle-delay 0.5))
-;;#+end_src
-
-* Alternative:  Per-Package Integration
-
-If you don't want every use-package declaration to use straight.el, you can turn off `straight-use-package-by-default` and just add `:straight t` to individual use-package blocks:
-
-#+begin_src emacs-lisp
-#(use-package org-modern
-#  :straight t
-#  :config
-#  (org-modern-mode))
-##+end_src
