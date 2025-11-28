@@ -3,13 +3,13 @@
   (defvar mb/default-variable-font-size 140)
 
   ;; Font Selection
-  (set-face-attribute 'default nil :font "Fira Code Retina" :height mb/default-font-size)
-
+  ;;(set-face-attribute 'default nil :font "Fira Code Retina" :height mb/default-font-size)
+  (set-face-attribute 'default nil :font "FiraCode Nerd Font" :height mb/default-font-size)
   ;; Set the fixed pitch face
-  (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height mb/default-font-size)
-
+  ;(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height mb/default-font-size)
+  (set-face-attribute 'fixed-pitch nil :font "FiraCode Nerd Font" :height mb/default-font-size)
   ;; Set the variable pitch face
-  (set-face-attribute 'variable-pitch nil :font "Fira Code" :height mb/default-variable-font-size :weight 'regular)
+  (set-face-attribute 'variable-pitch nil :font "FiraCode Nerd Font" :height mb/default-variable-font-size :weight 'regular)
 
 (use-package doom-themes
   :init (load-theme 'doom-outrun-electric t)
