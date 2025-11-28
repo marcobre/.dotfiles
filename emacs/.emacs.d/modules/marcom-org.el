@@ -140,6 +140,9 @@
   (add-hook 'org-shiftleft-final-hook 'windmove-left)
   (add-hook 'org-shiftdown-final-hook 'windmove-down)
   (add-hook 'org-shiftright-final-hook 'windmove-right)
+(use-package ox-hugo
+  :straight t
+  :after org)
 
 (with-eval-after-load 'org
   ;; This is needed as of Org 9.2
@@ -169,6 +172,7 @@
                       "/inbox.org"
                       "/Haus.org"
                       "/tasks.org"
+		            "/arbeit-cal.org"
                  "/privat.org")))
   ;)
   ;   (add-to-list 'org-agenda-files org-default-tasks-file 'append)
@@ -253,51 +257,48 @@
      (sql . t)
      (ditaa . t)))
 
-(use-package hydra
-  :defer t)
+(use-package pretty-hydra
+  :defer t
+  :after hydra)
 
-          (defhydra hydra-org-refiler (org-mode-map "C-c s" :hint nil)
-              "
-            ^Navigate^      ^Refile^       ^Move^           ^Update^        ^Go To^        ^Dired^
-            ^^^^^^^^^^---------------------------------------------------------------------------------------
-            _k_: ↑ previous _t_: tasks     _m X_: projects  _T_: todo task  _g t_: tasks    _g X_: projects
-            _j_: ↓ next     _i_: incubate  _m P_: personal  _S_: schedule   _g i_: incubate _g P_: personal
-            _a_: archive    _p_: personal  _m T_: technical _D_: deadline   _g x_: inbox    _g T_: technical
-            _d_: delete     _r_: refile                   _R_: rename     _g n_: notes    _g C_: completed
-            "
-              ("<up>" org-previous-visible-heading)
-              ("<down>" org-next-visible-heading)
-              ("k" org-previous-visible-heading)
-              ("j" org-next-visible-heading)
-          ;    ("c" org-archive-subtree-as-completed) ;; idea to archive into journal files
-              ("a" org-archive-subtree)
-              ("d" org-cut-subtree)
-              ("t" org-refile-to-task)
-              ("i" org-refile-to-incubate)
-              ("p" org-refile-to-personal-notes)
-              ("r" org-refile)
-              ("m X" org-refile-to-projects-dir)
-              ("m P" org-refile-to-personal-dir)
-              ("m T" org-refile-to-technical-dir)
-              ("T" org-todo)
-              ("S" org-schedule)
-              ("D" org-deadline)
-              ("R" org-rename-header)
-              ("g t" (find-file-other-window org-default-tasks-file))
-              ("g i" (find-file-other-window org-default-incubate-file))
-              ("g x" (find-file-other-window org-default-inbox-file))
-              ("g c" (find-file-other-window org-default-completed-file))
-              ("g n" (find-file-other-window org-default-notes-file))
-              ("g X" (show-project-notes))
-          ;    ("g X" (dired org-default-projects-dir))
-          ;    ("g P" (dired org-default-personal-dir))
-              ("g P" (show-personal-notes))
-              ("g T" (show-technical-notes))
-          ;    ("g T" (dired org-default-technical-dir))
-              ("g C" (dired org-default-completed-dir))
-              ("[\t]" (org-cycle))
-              ("s" (org-save-all-org-buffers) "save")
-              ("q" nil "quit"))
+(pretty-hydra-define hydra-org-refiler
+  (:hint nil :color blue :quit-key "q" :title "Org Refiler" :separator "-")
+  ("Navigate"
+   (("k" org-previous-visible-heading "↑ previous")
+    ("j" org-next-visible-heading "↓ next")
+    ("a" org-archive-subtree "archive")
+    ("d" org-cut-subtree "delete"))
+
+   "Refile"
+   (("t" org-refile-to-task "tasks")
+    ("i" org-refile-to-incubate "incubate")
+    ("p" org-refile-to-personal-notes "personal")
+    ("r" org-refile "refile"))
+
+   "Move"
+   (("m X" org-refile-to-projects-dir "projects")
+    ("m P" org-refile-to-personal-dir "personal")
+    ("m T" org-refile-to-technical-dir "technical"))
+
+   "Update"
+   (("T" org-todo "todo task")
+    ("S" org-schedule "schedule")
+    ("D" org-deadline "deadline")
+    ("R" org-rename-header "rename"))
+
+   "Go To"
+   (("g t" (find-file-other-window org-default-tasks-file) "tasks")
+    ("g i" (find-file-other-window org-default-incubate-file) "incubate")
+    ("g x" (find-file-other-window org-default-inbox-file) "inbox")
+    ("g c" (find-file-other-window org-default-completed-file) "completed")
+    ("g n" (find-file-other-window org-default-notes-file) "notes"))
+
+   "Navigation"
+   (("g X" show-project-notes "projects")
+    ("g P" show-personal-notes "personal")
+    ("g T" show-technical-notes "technical")
+    ("g C" (dired org-default-completed-dir) "completed")
+    ("s" org-save-all-org-buffers "save"))))
 
           ;; Hydra functions as of howards blog
           (defun org-subtree-region ()

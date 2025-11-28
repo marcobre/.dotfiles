@@ -129,6 +129,7 @@ Load modules as require statement from the path
   (require 'marcom-theme)
   (require 'marcom-keybindings)
   (require 'marcom-org)
+  (require 'marcom-deft)
 #+end_src
 
 * My Emacs Module configurations
@@ -248,13 +249,13 @@ This module includes the Theme, modeline and font config
   (defvar mb/default-variable-font-size 140)
 
   ;; Font Selection
-  (set-face-attribute 'default nil :font "Fira Code Retina" :height mb/default-font-size)
-
+  ;;(set-face-attribute 'default nil :font "Fira Code Retina" :height mb/default-font-size)
+  (set-face-attribute 'default nil :font "FiraCode Nerd Font" :height mb/default-font-size)
   ;; Set the fixed pitch face
-  (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height mb/default-font-size)
-
+  ;(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height mb/default-font-size)
+  (set-face-attribute 'fixed-pitch nil :font "FiraCode Nerd Font" :height mb/default-font-size)
   ;; Set the variable pitch face
-  (set-face-attribute 'variable-pitch nil :font "Fira Code" :height mb/default-variable-font-size :weight 'regular)
+  (set-face-attribute 'variable-pitch nil :font "FiraCode Nerd Font" :height mb/default-variable-font-size :weight 'regular)
  #+END_SRC
 
 *** Color Theme
@@ -437,6 +438,12 @@ owner custom layers.
 
 [[https://orgmode.org/][Org Mode]] is one of the hallmark features of Emacs.  It is a rich document editor, project planner, task and time tracker, blogging engine, and literate coding utility all wrapped up in one package.
 
+If Emacs is running as a server i can jot down a capture note from anywhere outside of Emacs by binding to following snippet to a convenient alias or keybinding
+
+#+BEGIN_SRC emacs-lisp :tangle no results: none
+setsid -f emacsclient -q -c -e '(abs--quick-capture)' >/dev/null 2>&1
+#+END_SRC
+
 *** The =marcom-org.el= Better Font Faces
 
 The =mb/org-font-setup= function configures various text faces to tweak the sizes of headings and use variable width fonts in most cases so that it looks more like we're editing a document in =org-mode=.  We switch back to fixed width (monospace) fonts for code blocks and tables so that they display correctly.
@@ -595,6 +602,9 @@ This section contains the basic configuration for =org-mode= plus the configurat
   (add-hook 'org-shiftleft-final-hook 'windmove-left)
   (add-hook 'org-shiftdown-final-hook 'windmove-down)
   (add-hook 'org-shiftright-final-hook 'windmove-right)
+(use-package ox-hugo
+  :straight t
+  :after org)
   #+end_src
 *** Structured templates
 #+BEGIN_SRC emacs-lisp :tangle "modules/marcom-org.el"
@@ -632,6 +642,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
                       "/inbox.org"
                       "/Haus.org"
                       "/tasks.org"
+		            "/arbeit-cal.org"
                  "/privat.org")))
   ;)
   ;   (add-to-list 'org-agenda-files org-default-tasks-file 'append)
@@ -745,7 +756,7 @@ Activate the following languages
 
  adopted from http://www.howardism.org/Technical/Emacs/getting-more-boxes-done.html
  
-#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-org.el"
+#+BEGIN_SRC emacs-lisp :tangle no :results none
 (use-package hydra
   :defer t)
 
@@ -905,6 +916,164 @@ Activate the following languages
      (global-set-key (kbd "<f4>") 'hydra-org-refiler/body)
    #+END_SRC
 
+*** The pretty hydra
+#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-org.el"
+(use-package pretty-hydra
+  :defer t
+  :after hydra)
+
+(pretty-hydra-define hydra-org-refiler
+  (:hint nil :color blue :quit-key "q" :title "Org Refiler" :separator "-")
+  ("Navigate"
+   (("k" org-previous-visible-heading "↑ previous")
+    ("j" org-next-visible-heading "↓ next")
+    ("a" org-archive-subtree "archive")
+    ("d" org-cut-subtree "delete"))
+
+   "Refile"
+   (("t" org-refile-to-task "tasks")
+    ("i" org-refile-to-incubate "incubate")
+    ("p" org-refile-to-personal-notes "personal")
+    ("r" org-refile "refile"))
+
+   "Move"
+   (("m X" org-refile-to-projects-dir "projects")
+    ("m P" org-refile-to-personal-dir "personal")
+    ("m T" org-refile-to-technical-dir "technical"))
+
+   "Update"
+   (("T" org-todo "todo task")
+    ("S" org-schedule "schedule")
+    ("D" org-deadline "deadline")
+    ("R" org-rename-header "rename"))
+
+   "Go To"
+   (("g t" (find-file-other-window org-default-tasks-file) "tasks")
+    ("g i" (find-file-other-window org-default-incubate-file) "incubate")
+    ("g x" (find-file-other-window org-default-inbox-file) "inbox")
+    ("g c" (find-file-other-window org-default-completed-file) "completed")
+    ("g n" (find-file-other-window org-default-notes-file) "notes"))
+
+   "Navigation"
+   (("g X" show-project-notes "projects")
+    ("g P" show-personal-notes "personal")
+    ("g T" show-technical-notes "technical")
+    ("g C" (dired org-default-completed-dir) "completed")
+    ("s" org-save-all-org-buffers "save"))))
+
+          ;; Hydra functions as of howards blog
+          (defun org-subtree-region ()
+            "Return a list of the start and end of a subtree."
+            (save-excursion
+              (list (progn (org-back-to-heading) (point))
+                    (progn (org-end-of-subtree)  (point)))))
+
+          (defun org-refile-directly (file-dest)
+            "Move the current subtree to the end of FILE-DEST.
+          If SHOW-AFTER is non-nil, show the destination window,
+          otherwise, this destination buffer is not shown."
+            (interactive "Destination: ")
+
+            (defun dump-it (file contents)
+              (find-file-other-window file-dest)
+              (goto-char (point-max))
+              (insert "\n" contents))
+
+            (save-excursion
+              (let* ((region (org-subtree-region))
+                     (contents (buffer-substring (first region) (second region))))
+                (apply 'kill-region region)
+                (if org-refile-directly-show-after
+                    (save-current-buffer (dump-it file-dest contents))
+                  (save-window-excursion (dump-it file-dest contents))))))
+
+          (defvar org-refile-directly-show-after nil
+            "When refiling directly (using the `org-refile-directly'
+          function), show the destination buffer afterwards if this is set
+          to `t', otherwise, just do everything in the background.")
+
+          (defun org-refile-to-incubate ()
+            "Refile (move) the current Org subtree to `org-default-incubate-file'."
+            (interactive)
+            (org-refile-directly org-default-incubate-file))
+
+          (defun org-refile-to-task ()
+            "Refile (move) the current Org subtree to `org-default-tasks-file'."
+            (interactive)
+            (org-refile-directly org-default-tasks-file ))
+
+          (defun org-refile-to-personal-notes ()
+            "Refile (move) the current Org subtree to `org-default-notes-file'."
+            (interactive)
+            (org-refile-directly org-default-notes-file))
+
+          (defun org-refile-to-completed ()
+            "Refile (move) the current Org subtree to `org-default-completed-file',
+          unless it doesn't exist, in which case, refile to today's journal entry."
+            (interactive)
+            (if (and org-default-completed-file (file-exists-p org-default-completed-file))
+                (org-refile-directly org-default-completed-file)
+              (org-refile-directly (get-journal-file-today))))
+
+          (defun org-rename-header (label)
+            "Rename the current section's header to LABEL, and moves the
+          point to the end of the line."
+            (interactive (list
+                          (read-string "Header: "
+                                       (substring-no-properties (org-get-heading t t t t)))))
+            (org-back-to-heading)
+            (replace-string (org-get-heading t t t t) label))
+
+          (defun org-archive-subtree-as-completed ()
+            "Archives the current subtree to today's current journal entry."
+            (interactive)
+            ;; According to the docs for `org-archive-subtree', the state should be
+            ;; automatically marked as DONE, but I don't notice that:
+            (when (org-get-todo-state)
+              (org-todo "DONE"))
+
+            (let* ((org-archive-file (or org-default-completed-file
+                                         (todays-journal-entry)))
+                   (org-archive-location (format "%s::" org-archive-file)))
+               (org-archive-subtree)))
+
+          (defun todays-journal-entry ()
+            "Return the full pathname to the day's journal entry file.
+          Granted, this assumes each journal's file entry to be formatted
+          with year/month/day, as in `20190104' for January 4th.
+
+          Note: `org-journal-dir' variable must be set to the directory
+          where all good journal entries live, e.g. ~/journal."
+            (let* ((daily-name   (format-time-string "%Y%m%d"))
+                   (file-name    (concat org-journal-dir daily-name)))
+              (expand-file-name file-name)))
+
+          (defun org-boxes-workflow ()
+            "Load the default tasks file and start our hydra on the first task shown."
+            (interactive)
+            (let ((org-startup-folded nil))
+              (find-file org-default-tasks-file)
+              (delete-other-windows)
+              (ignore-errors
+                (mb/org-agenda))
+              (delete-other-windows)
+              (split-window-right)
+              ;;(split-window-right-and-focus) seems to be gone
+              (pop-to-buffer (get-file-buffer org-default-tasks-file))
+              (goto-char (point-min))
+              (org-next-visible-heading 1)
+              (hydra-org-refiler/body)))
+
+          (defun mb/org-agenda ()
+            "Displays my favorite agenda perspective."
+            (interactive)
+            (org-agenda nil "a")
+            (get-buffer "*Org Agenda*")
+            (execute-kbd-macro (kbd "A t")))
+     ;; Org Hydra
+     (global-set-key (kbd "<f4>") 'hydra-org-refiler/body)
+   #+END_SRC
+   
 *** The =marcom-org.el= call to provide
 #+BEGIN_SRC emacs-lisp :tangle "modules/marcom-org.el"
 ;;; Provide
@@ -912,7 +1081,77 @@ Activate the following languages
 ;;; marcom-org.el ends here
 #+end_src
 
+** The =marcom-deft.el= module and their GTD functions
 
+#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-deft.el"
+(use-package deft
+;;  :ensure t
+  :config 
+  (setq deft-directory "~/Syncthing/org/notes/")
+  (setq deft-strip-title-regexp "\\(?:^%+\\|^#\\+TITLE: *\\|^#\\+COMMENT: *\\|^[#* ]+\\|-\\*-[[:alpha:]]+-\\*-\\|^Title:[  ]*\\|#+$\\)")
+  (setq deft-text-mode 'org-mode)
+  (setq deft-extension "org")
+  (setq deft-extensions '("org"))
+  (setq deft-default-extension "org")
+
+  ;; to create new files based on title
+  (setq deft-use-filename-as-title nil)
+  (setq deft-use-filter-string-for-filename t)
+  (setq deft-file-naming-rules
+      '((noslash . "-")
+        (nospace . "-")
+        (case-fn . downcase))))
+
+(defun show-notes ()
+  (interactive)
+  (hs-kill-buffers "*Deft*")
+  (when deft-directory "~/Syncthing/org/notes/"
+        (setq-default deft-directory "~/Syncthing/org/notes/"))
+  (deft))
+
+(defun show-project-notes ()
+  (interactive)
+  (hs-kill-buffers "*Deft*")
+  (setq-default deft-directory "~/Syncthing/org/projects/")
+  (deft))
+
+(defun show-technical-notes ()
+  (interactive)
+  (hs-kill-buffers "*Deft*")
+  (setq-default deft-directory "~/Syncthing/org/technical/")
+  (deft))
+
+(defun show-personal-notes ()
+  (interactive)
+  (hs-kill-buffers "*Deft*")
+  (setq-default deft-directory "~/Syncthing/org/personal/")
+  (deft))
+
+;; Deft mit Notizen auf C-c n
+(global-set-key "\C-cn" 'show-notes)
+(global-set-key "\C-cP" 'show-project-notes)
+
+;; Deft mit programming notes auf C-c p
+(global-set-key "\C-cp" 'show-personal-notes)
+(global-set-key "\C-ct" 'show-technical-notes)
+
+(require 'cl)
+(defun hs-kill-buffers (regexp)
+  "Kill buffers matching REGEXP without asking for confirmation."
+  (interactive "sKill buffers matching this regular expression: ")
+  (flet ((kill-buffer-ask (buffer) (kill-buffer buffer)))
+    (kill-matching-buffers regexp)))
+(setq deft-recursive t)
+  
+;;key to launch deft
+(global-set-key (kbd "C-c d") 'deft)
+#+END_SRC
+*** The =marcom-deft.el= call to provide
+#+BEGIN_SRC emacs-lisp :tangle "modules/marcom-deft.el"
+;;; Provide
+(provide 'marcom-deft)
+;;; marcom-deft.el ends here
+#+end_src
 * Example Package Install with use-package
 
 Here are examples of use-package declarations that will install packages using straight.el by default:
