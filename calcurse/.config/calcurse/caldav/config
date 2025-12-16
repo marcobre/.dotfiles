@@ -2,6 +2,7 @@
 Binary = calcurse
 Hostname : cloud.area030.org
 Path = /remote.php/dav/calendars/marcom/personal/
+#PATH = /remote.php/dav/calendars/sanne/personal
 AuthMethod = basic
 HTTPS = Yes
 DryRun = No
