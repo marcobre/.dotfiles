@@ -34,6 +34,5 @@ alias calsync="CALCURSE_CALDAV_PASSWORD=$(pass show area030.org) calcurse-caldav
 alias screenshare="~/.config/hypr/scripts/PortalHyprland.sh"
 # Webcam aliases
 
-alias dellcam="mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video4"
-
-alias cam="mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0"
+alias dellcam="mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video4 --profile=low-latency --untimed --vf=hflip"
+alias cam="mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0 --profile=low-latency --untimed --vf=hflip"

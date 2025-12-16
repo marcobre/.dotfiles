@@ -1,9 +1,12 @@
+Amelie2015William2023!,V
+iuuslogqxuwduzyo,V
+kH6PL-3NxEA-BJsEK-FTTib-b4mmK,V
+,V
 gsettings set org.gnome.desktop.wm.keybindings toggle-shaded "['disabled']",V
 apt_install "curl" "curl",V
 apt_install "ca-certificates" "ca-certificates",V
 apt_install "gpg" "gpg",V
 #==================================# Add keys to apt#==================================p,v
-,V
 #,v
 bindsym XF86PowerOff		exec sudo shutdown -h now,V
 ym XF86AudioRaiseVolume	exec $inc,V
