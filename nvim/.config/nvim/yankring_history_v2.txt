@@ -1,3 +1,4 @@
+#bind=SUPER,p,spawn,wmenu-run -l 10,V
 Amelie2015William2023!,V
 iuuslogqxuwduzyo,V
 kH6PL-3NxEA-BJsEK-FTTib-b4mmK,V

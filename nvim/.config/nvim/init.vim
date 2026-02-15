@@ -445,7 +445,7 @@ vmap <C-x> "*c
 vmap <C-v> c<ESC>"*p
 imap <C-v> <ESC>"*pa
 " copy and paste
-set go+=a               " Visual selection automatically copied to the clipboard
+"set go+=a               " Visual selection automatically copied to the clipboard
 
 
 " Airline ------------------------------
