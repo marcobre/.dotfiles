@@ -55,18 +55,18 @@ return {
         preferred_picker = "auto", -- one of: "auto", "snacks", "fzf-lua", "telescope", "mini"
       },
     },
-    lead_prefix = "<leader>m", -- change keymap prefix (default: <leader>m)
+    lead_prefix = "<leader>M", -- change keymap prefix (default: <leader>m)
     keymaps = {
-      mount = "<leader>mm", -- creates an ssh connection and mounts via sshfs
-      unmount = "<leader>mu", -- disconnects an ssh connection and unmounts via sshfs
-      explore = "<leader>me", -- explore an sshfs mount using your native editor
-      change_dir = "<leader>md", -- change dir to mount
-      command = "<leader>mo", -- run command on mount
-      config = "<leader>mc", -- edit ssh config
-      reload = "<leader>mr", -- manually reload ssh config
-      files = "<leader>mf", -- browse files using chosen picker
-      grep = "<leader>mg", -- grep files using chosen picker
-      terminal = "<leader>mt", -- open ssh terminal session
+      mount = "<leader>Mm", -- creates an ssh connection and mounts via sshfs
+      unmount = "<leader>Mu", -- disconnects an ssh connection and unmounts via sshfs
+      explore = "<leader>Me", -- explore an sshfs mount using your native editor
+      change_dir = "<leader>Md", -- change dir to mount
+      command = "<leader>Mo", -- run command on mount
+      config = "<leader>Mc", -- edit ssh config
+      reload = "<leader>Mr", -- manually reload ssh config
+      files = "<leader>Mf", -- browse files using chosen picker
+      grep = "<leader>Mg", -- grep files using chosen picker
+      terminal = "<leader>Mt", -- open ssh terminal session
     },
   }, -- Refer to the configuration section below
 } -- or leave empty for defaults
