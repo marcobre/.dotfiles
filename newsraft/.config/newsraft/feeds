@@ -21,20 +21,6 @@
 # Another section declaration will cause next feed entries to be added to the
 # corresponding section. Thus, the following feed entries will not belong to
 # the "News Reports" section, but to the "Blog Posts" section.
-@ Blog Posts
-
-https://www.archlinux.org/feeds/news/ "Archlinux"
-https://opensource.com/taxonomy/term/6803/feed "open source linux"
-https://www.howtogeek.com/feed/ "howtogeek"
-https://www.topbug.net/blog/category/unix-variants/gnu-linux/feed/ "Topbug linux"
-http://lukesmith.xyz/rss.xml "Luke Smith Blog"
-https://blog.fefe.de/rss.xml?html "Fefe"
-https://alternativlos.org/alternativlos.rss "alternativlos"
-https://www.lesswrong.com/feed.xml?view=curated-rss "LessWrong 2.0 Curated"
-https://guru.multimedia.cx/feed/ "~Lair Of The Multimedia Guru"
-https://mjg59.dreamwidth.org/data/rss "Matthew Garrett - Dreamwidth Studios"
-http://allanmcrae.com/feed/ "Allan McCrae"
-
 
 # As you might have noticed, feeds http://example.org/feed1.xml and
 # http://example.org/feed2.xml don't belong to any section; but actually they
@@ -79,6 +65,19 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCJdmdUp5BrsWsYVQUylCMLg "Ar
 https://www.youtube.com/feeds/videos.xml?channel_id=UCfLsPYDDrGaFc9XhfDM-ktA "Null Byte"                             #Null Byte
 https://www.youtube.com/feeds/videos.xml?channel_id=UCSQYuWtcINqtwG3n6Vvb-0w "Mario"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCXuqSBlHAE6Xw-yeJA0Tunw "Linus Tech Tips"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA "Computerphile"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCp3yVOm6A55nx65STpm3tXQ "Craft Computing"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCVS6ejD9NLZvjsvhcbiDzjw "Crosstalk Solutions"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCR-DXc1voovS8nhAvccRZhg "Jeff Geerling"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCHkYOD-3fZbuGhwsADBd9ZQ "Lawrence Systems"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCxQKHvKbmSzGMvUrVtJYnUA "Learn Linux TV"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCOWcZ6Wicl-1N34H0zZe38w "Level1Linux"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC4w1YQAJMWOz4qtxinq55LQ "Level1Techs"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCgTNupxATBfWmfehv21ym-g "Null Byte"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCW6xlqxSY3gGur4PkGPEUeA "Seytonic"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCy0tKL1T7wFoYcxCe0xjN6Q "Technology Connections"
+https://www.youtube.com/feeds/videos.xml?channel_id=UClRwC5Vc8HrB6vGx6Ti-lhA "Technology Connextras"
+
 @ Youtube Comedy
 https://www.youtube.com/feeds/videos.xml?channel_id=UCtUqetWlf7GCvbbAqhI8fnA "i know i am awesome"                   #i know i am awesome
 https://www.youtube.com/feeds/videos.xml?channel_id=UCOOMgoGO9PwAb65v6Zyj43w "Nik Tek"                               #Nik Tek
@@ -110,6 +109,9 @@ https://www.reddit.com/r/opensource/.rss "OpenSource"
 https://www.reddit.com/r/commandline/.rss "commandline"
 https://www.reddit.com/r/archlinux/.rss "Arch Reddit"
 https://www.reddit.com/user/C4rnAg3.rss "Bangladeshi Bash"
+https://www.reddit.com/user/lawrencesystems/m/homelab/.rss "homelab subreddits curated by /u/lawrencesystems"
+https://www.reddit.com/user/lawrencesystems/m/linux/.rss "linux subreddits curated by /u/lawrencesystems"
+https://www.reddit.com/user/lawrencesystems/m/support/.rss "support subreddits curated by /u/lawrencesystems"
 
 @ Blogs
 https://www.archlinux.org/feeds/news/ "Archlinux Blog"
@@ -170,6 +172,7 @@ https://www.graswurzel.net/gwr/feed/ "Graswurzel"
 https://steigerlegal.ch/feed/ "Steigerlegal.ch"
 https://www.antifainfoblatt.de/rss.xml "antifainfoblatt"
 https://perspektive-online.net/feed/ "perspektive-online"
+https://pluralistic.net/feed/ "Pluralistic: Daily links from Cory Doctorow"
 
 @ IT
 https://insanity.industries/index.xml "Insanity"
@@ -192,6 +195,7 @@ https://t3n.de/rss.xml "t3n"
 https://www.theregister.com/headlines.atom "theregister"
 https://paper.wf/kubikpixel/feed/ "kubikpixel"
 https://mialikescoffee.com/feed.xml "mialikescoffee"
+https://itsfoss.com/rss/ "It's FOSS"
 
 @ Security
 https://www.ghacks.net/feed "gHacks"
@@ -207,7 +211,9 @@ https://tarnkappe.info/feed/ "tarnkappe"
 https://blog.fdik.org/rss "fdik"
 https://www.schneier.com/feed/atom/ "schneier"
 https://www.privacyinternational.org/rss.xml "privacyinternational"
-
+https://krebsonsecurity.com/feed/ "Krebs on Security"
+http://feeds.feedburner.com/GoogleOnlineSecurityBlog "Google Online Security Blog"
+https://0dayfans.com/feed.rss "0day Fans"
 @ News
 #https://www.infosperber.ch/inc/rss.cfm "News"
 https://infosperber.ch/shoutemfeed "infosperber"
@@ -235,3 +241,25 @@ https://www.deaf-forever.de/feed "deaf-forever"
 # 'gemget', then you might do this (note the silencing flags, so you
 # don't spook the terminal while newsraft is running).
 #$(gemget -sq gemini://example.org/feed8.xml) "Reasons to use Gemini"
+
+
+
+
+https://haircutfish.com/feed.xml "Haircutfish"
+https://liliputing.com/feed/ "Liliputing"
+https://2.5admins.com/feed/podcast "2.5 Admins"
+https://www.omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/cf0c25ad-cf01-4da5-ae1c-b0fc015f790e/53ed270b-7147-4f70-81c2-b0fc015fe4ed/podcast.rss "Better Offline Podcast"
+https://www.bleepingcomputer.com/feed/ "BleepingComputer"
+https://hackaday.com/blog/feed/ "Blog – Hackaday"
+https://blog.talosintelligence.com/rss/ "Cisco Talos Blog"
+https://www.citationneeded.news/rss/ "Citation Needed"
+https://databreaches.net/feed/ "DataBreaches.net"
+https://doublepulsar.com/feed "DoublePulsar - Kevin Beaumont @GossiTheDog"
+https://us8.campaign-archive.com/feed?u=686728f858576ae4cd7b33bde&id=4cdcfbadcc "Lawrence Systems Email Newsletter"
+https://www.reddit.com/.rss?feed=1760a98db8f27b2f0880710acdbffc7e61a435b9&user=lawrencesystems "Lawrencesystems Reddit"
+https://www.techdirt.com/feed/ "Techdirt"
+https://thedfirreport.com/feed/ "The DFIR Report"
+https://www.theregister.com/headlines.atom "The Register"
+https://therecord.media/feed "The Record from Recorded Future News"
+https://risky.biz/feeds/risky-business-news/ "Risky Bulletin"
+https://www.huntress.com/blog/rss.xml "Huntress Blog"

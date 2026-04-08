@@ -1,7 +1,7 @@
 [General]
 Binary = calcurse
 Hostname : cloud.area030.org
-Path = /remote.php/dav/calendars/marcom/personal/
+Path = /remote.php/dav/calendars/marcom/personal_shared_by_sanne/
 #PATH = /remote.php/dav/calendars/sanne/personal
 AuthMethod = basic
 HTTPS = Yes

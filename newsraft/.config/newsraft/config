@@ -15,8 +15,8 @@ bind ^P mark-unread-all
 bind f exec feh "%l"
 
 # This will launch mpv in the background.
-bind m exec mpv --no-terminal "%l" &
-
+#bind m exec mpv --no-terminal "%l" &
+bind m exec setsid mpv --terminal=no "%l" &
 # This will launch mpv interactively.
 bind M exec mpv "%l"
 
